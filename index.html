@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bookers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="shortcut icon" href="imagenes/favicon.ico" />
+</head>
+
+<body>
+<div id="app">
+    <header class="fixed-top bg-white">
+        <h1 id="logoFeria" class="ml-3"> Bookers </h1>
+
+        <nav class="col navbar navbar-expand-md navbar-light">
+            <button class="navbar-toggler ml-auto"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#barra"
+                    aria-expanded="true"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="barra">
+                <ul id="menu" class="navbar-nav text-center ml-auto">
+                    <li class="nav-item" v-if="!store.auth.logged">
+                        <router-link class="nav-link" to="/">Login</router-link>
+                    </li>
+                    <li class="nav-item" v-if="!store.auth.logged">
+                        <router-link class="nav-link" to="/registro">Registro</router-link>
+                    </li>
+                    <li class="nav-item" v-if="store.auth.logged">
+                        <listado-notificaciones></listado-notificaciones>
+                    </li>
+                    <li class="nav-item" v-if="store.auth.logged">
+                        <router-link class="nav-link" to="/novedades">Novedades</router-link>
+                    </li>
+                    <li class="nav-item" v-if="store.auth.logged">
+                        <router-link class="nav-link" to="/eventos">Eventos</router-link>
+                    </li>
+                    <li class="nav-item" v-if="store.auth.logged">
+                        <router-link class="nav-link" to="/perfil">Perfil</router-link>
+                    </li>
+                    <li class="nav-item nav-link" v-if="store.auth.logged " @click="logout()">
+                        Logout
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <notificacion
+            :tipo="store.notificacion.tipo"
+            :mensaje="store.notificacion.mensaje"
+            @closed="cerrar()"
+            v-if="store.notificacion.mensaje != null"
+        >
+        </notificacion>
+
+        <router-view></router-view>
+    </main>
+
+
+    <footer>
+        <ul class="m-auto p-0 text-center">
+            <li class="pb-1">Copyright <a href="mailto:florpaez98@gmail.com?subject=Final" target="_blank">Florencia Paez</a> y
+                <a href="mailto:pamela.iglesias@davinci.edu.ar?subject=Final" target="_blank">Pamela Iglesias</a></li>
+            <li>Programación III | DWTN4A | 2020</li>
+        </ul>
+    </footer>
+</div>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/all.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script src="js/services/auth.js"></script>
+<script src="js/components/form-login.js"></script>
+<script src="js/components/listado-novedades.js"></script>
+<script src="js/components/listado-notificaciones.js"></script>
+<script src="js/components/novedad.js"></script>
+<script src="js/components/comentar.js"></script>
+<script src="js/components/novedad-comentarios.js"></script>
+<script src="js/components/seccion-novedades.js"></script>
+<script src="js/components/evento.js"></script>
+<script src="js/components/listado-eventos.js"></script>
+<script src="js/components/seccion-eventos.js"></script>
+<script src="js/components/publicar.js"></script>
+<script src="js/components/perfil-usuario.js"></script>
+<script src="js/components/form-registro.js"></script>
+<script src="js/components/form-perfil.js"></script>
+<script src="js/components/notificacion.js"></script>
+<script src="js/app.js"></script>
+</body>
+
+</html>
